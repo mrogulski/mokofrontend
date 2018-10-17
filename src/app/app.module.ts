@@ -11,6 +11,7 @@ import { AccordionModule } from "primeng/components/accordion/accordion";
 import { PanelModule } from "primeng/components/panel/panel";
 import { ButtonModule } from "primeng/components/button/button";
 import { RadioButtonModule } from "primeng/components/radioButton/radioButton";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
@@ -34,7 +35,8 @@ import { HttpModule } from "@angular/http";
     PanelModule,
     ButtonModule,
     RadioButtonModule,
-    HttpModule
+    HttpModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
