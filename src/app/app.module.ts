@@ -14,9 +14,17 @@ import { RadioButtonModule } from "primeng/components/radioButton/radioButton";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
+import { HomeComponent } from "./common-components/home/home.component";
+
+import { HttpModule } from "@angular/http";
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, MessagesComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    MessagesComponent,
+    HomeComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -25,7 +33,8 @@ import { FormsModule } from "@angular/forms";
     AccordionModule,
     PanelModule,
     ButtonModule,
-    RadioButtonModule
+    RadioButtonModule,
+    HttpModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,17 @@
-<div class="login-image"></div>
-<div class="card login-panel ui-fluid">
-  <div class="login-panel-content">
-    <div class="ui-g">
-      <div class="ui-g-3" style="text-align:left;">
-        <img src="https://www.primefaces.org/avalon-ng/assets/layout/images/login/icon-login.svg" alt="">
-      </div>
+<form (ngSubmit)="login()">
+  <div class="ui-g-12 ui-md-4">
+    <div class="ui-inputgroup">
+      <h3 class="first">User</h3>
+      <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+      <input type="text" pInputText name="username" [(ngModel)]="credentials.username" #username="ngModel" required
+        placeholder="Username" />
+    </div>
+    <div class="ui-inputgroup">
+      <h3 class="first">Password</h3>
+      <span class="ui-inputgroup-addon"><i class="fa fa-lock"></i></span>
+      <input type="password" pPassword name="password" [(ngModel)]="credentials.password" #password="ngModel" required
+        placeholder="Password" />
     </div>
   </div>
-</div>
+  <button class="btn btn-primary">Log In</button>
+</form>
