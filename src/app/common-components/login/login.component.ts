@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthenticationService } from "../../services/authentication.service";
-import { catchError, map, tap } from "rxjs/operators";
-import { Observable, of } from "rxjs";
+import { AuthenticationService } from "../../services/authentication-service/authentication.service";
+import { UserService } from "../../services/user-service/user.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-login",
@@ -10,15 +10,21 @@ import { Observable, of } from "rxjs";
 })
 export class LoginComponent implements OnInit {
   credentials: any = {};
-
-  constructor(public authenticationService: AuthenticationService) {}
+  constructor(
+    public authenticationService: AuthenticationService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit() {}
 
   login() {
     this.authenticationService
       .login(this.credentials.username, this.credentials.password)
-      .toPromise()
-      .then(response => console.log(response));
+      .subscribe(results => {
+        this.userService.login(results);
+        this.router.navigate(["/home"]);
+        console.log("is admin " + this.userService.isAdminUser());
+      });
   }
 }
