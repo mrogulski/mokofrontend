@@ -1,13 +1,13 @@
-import { OrdersModule } from './orders.module';
+import { OrdersModule } from "./orders.module";
 
-describe('OrdersModule', () => {
+describe("OrdersModule", () => {
   let ordersModule: OrdersModule;
 
   beforeEach(() => {
     ordersModule = new OrdersModule();
   });
 
-  it('should create an instance', () => {
+  it("should create an instance", () => {
     expect(ordersModule).toBeTruthy();
   });
 });
