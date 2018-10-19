@@ -12,4 +12,34 @@
   right: 0;
   position: absolute;
   z-index: -1;
+
+}
+
+.jumbotron{
+  height: 50%;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
+
+form{
+  /* to center form horizontally */
+  position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+img{
+  height: 200px;
+  width: 200px;
+  /* -webkit-transform: rotate(-20deg);
+  transform: rotate(-20deg); */
+  margin-top: 30px;
+  margin-left: 42.5%;
+}
+
+span{
+  color: red;
 }

@@ -8,6 +8,9 @@ export class MessageService {
 
   add(message: string) {
     this.messages.push(message);
+    if(this.messages.length > 3) {
+      this.messages.splice(0, 1);
+    }
   }
 
   public clear(message?: string, index?: number) {

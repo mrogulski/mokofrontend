@@ -1,26 +1,27 @@
+<img src="/../../assets/logo.png">
 <div class="bg center-block">
-  <div class="jumbotron">
-    <div *ngIf="error" class="alert alert-danger">
-      {{error}}
-    </div>
+  <div class="jumbotron col-md-3">
     <form (ngSubmit)="login()" #loginForm="ngForm">
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" name="username" [(ngModel)]="credentials.username" #username="ngModel" required placeholder="Username"
+        <div for="username" class="control-label">Username</div>
+        <input type="text"  name="username" [(ngModel)]="credentials.username" #username="ngModel" required placeholder="Username"
           id="username" />
-        <div [hidden]="username.valid || username.pristine" class="alert alert-danger">
+        <span [hidden]="username.valid || username.pristine">
           Name is required
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" name="password" [(ngModel)]="credentials.password" #password="ngModel" required
-            placeholder="Password" id="password" />
-          <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-            Password is required
-          </div>
-        </div>
+        </span>
       </div>
-      <button class="btn btn-primary" [disabled]="!loginForm.form.valid">Log In</button>
+        <div class="form-group">
+          <div for="password" class="control-label">Password</div>
+          <input type="password"  name="password" [(ngModel)]="credentials.password" #password="ngModel" required
+            placeholder="Password" id="password" />
+          <span [hidden]="password.valid || password.pristine">
+            Password is required
+          </span>
+        </div>
+      <button class="btn btn-primary float-right" [disabled]="!loginForm.form.valid">Log In</button>
+      <span *ngIf="error" class="float-right">
+          {{error}}
+      </span>
     </form>
   </div>
 </div>
