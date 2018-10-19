@@ -1,5 +1,8 @@
 <div class="bg center-block">
   <div class="jumbotron">
+    <div *ngIf="error" class="alert alert-danger">
+      {{error}}
+    </div>
     <form (ngSubmit)="login()" #loginForm="ngForm">
       <div class="form-group">
         <label for="username">Username</label>

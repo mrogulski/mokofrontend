@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthenticationService } from "../../services/authentication-service/authentication.service";
 import { UserService } from "../../services/user-service/user.service";
 import { Router } from "@angular/router";
+import { MessageService } from "../../services/message-service/message.service";
 
 @Component({
   selector: "app-login",
@@ -10,10 +11,13 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   credentials: any = {};
+  error: string = "";
+
   constructor(
     public authenticationService: AuthenticationService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    public messageService: MessageService
   ) {}
 
   ngOnInit() {}
@@ -21,10 +25,22 @@ export class LoginComponent implements OnInit {
   login() {
     this.authenticationService
       .login(this.credentials.username, this.credentials.password)
-      .subscribe(results => {
-        this.userService.login(results);
-        this.router.navigate(["/home"]);
-        console.log("is admin " + this.userService.isAdminUser());
-      });
+      .subscribe(
+        results => {
+          this.userService.login(results);
+          this.router.navigate(["/home"]);
+          console.log("is admin " + this.userService.isAdminUser());
+        },
+        err => {
+          if (err.status == 0) {
+            this.error = "Something went wrong please try again later";
+          }
+          if (err.status == 401) {
+            this.error = "Invalid credentials";
+          }
+
+          this.messageService.add(this.error);
+        }
+      );
   }
 }
