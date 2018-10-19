@@ -17,12 +17,11 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule } from "@angular/forms";
 import { HomeComponent } from "./common-components/home/home.component";
 
-import { Http, HttpModule } from "@angular/http";
+import { HttpModule } from "@angular/http";
 
 import { JwtModule } from "@auth0/angular-jwt";
-import { AuthenticationService } from "./services/authentication-service/authentication.service";
-import { UserService } from "./services/user-service/user.service";
-import { AuthGuardService } from "./services/auth-guard-service/auth-guard.service";
+
+import { OrdersModule } from "./modules/orders-module/orders.module";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -50,7 +49,8 @@ export function tokenGetter() {
       config: {
         tokenGetter: tokenGetter
       }
-    })
+    }),
+    OrdersModule
   ],
   providers: [],
   bootstrap: [AppComponent]
