@@ -18,12 +18,14 @@ import { FormsModule } from "@angular/forms";
 import { HomeComponent } from "./common-components/home/home.component";
 
 import { HttpModule } from "@angular/http";
+import { HttpClientModule } from "@angular/common/http";
 
 import { JwtModule } from "@auth0/angular-jwt";
 
 import { OrdersModule } from "./modules/orders-module/orders.module";
 import { StatsModule } from "./modules/stats-module/stats.module";
 import { UsersModule } from "./modules/users-module/users.module";
+import { NavbarComponent } from "./common-components/navbar/navbar.component";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -34,7 +36,8 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     MessagesComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ export function tokenGetter() {
     ButtonModule,
     RadioButtonModule,
     HttpModule,
+    HttpClientModule,
     NgbModule,
     JwtModule.forRoot({
       config: {
