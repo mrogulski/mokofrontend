@@ -9,7 +9,7 @@ import { OrderService } from "../../services/order-service/order.service";
   styleUrls: ["./orders-table.component.css"]
 })
 export class OrdersTableComponent implements OnInit {
-  displayedColumns: string[] = ["id", "status"];
+  displayedColumns: string[] = ["createdDate", "id", "status"];
   dataSource: MatTableDataSource<Order>;
 
   @ViewChild(MatPaginator)

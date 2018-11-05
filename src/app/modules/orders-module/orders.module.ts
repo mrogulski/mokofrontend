@@ -6,6 +6,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatInputModule } from "@angular/material";
 import { OrdersTableComponent } from "./components/orders-table/orders-table.component";
+import { MatSortModule } from "@angular/material/sort";
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { OrdersTableComponent } from "./components/orders-table/orders-table.com
     MatTableModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatInputModule
+    MatInputModule,
+    MatSortModule
   ],
   declarations: [OrdersComponent, OrdersTableComponent]
 })
