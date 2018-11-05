@@ -26,6 +26,7 @@ import { OrdersModule } from "./modules/orders-module/orders.module";
 import { StatsModule } from "./modules/stats-module/stats.module";
 import { UsersModule } from "./modules/users-module/users.module";
 import { NavbarComponent } from "./common-components/navbar/navbar.component";
+import { MatButtonModule } from "@angular/material/button";
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -47,6 +48,7 @@ export function tokenGetter() {
     AccordionModule,
     PanelModule,
     ButtonModule,
+    MatButtonModule,
     RadioButtonModule,
     HttpModule,
     HttpClientModule,

@@ -1,10 +1,12 @@
+import { User } from "../../users-module/model/user";
+
 export class Order {
   id: number;
   status: string;
   createdDate: Date;
   dateFrom: Date;
   dateTo: Date;
-  userId: number;
+  user: User;
   adultBike: number;
   childBike: number;
   helmet: number;
