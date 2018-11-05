@@ -11,7 +11,6 @@ import { OrderService } from "../../services/order-service/order.service";
 export class OrdersTableComponent implements OnInit {
   displayedColumns: string[] = ["id", "status"];
   dataSource: MatTableDataSource<Order>;
-  orders;
 
   @ViewChild(MatPaginator)
   paginator: MatPaginator;
@@ -26,13 +25,11 @@ export class OrdersTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orderService
-      .getAllOrders()
-      .subscribe(orders => (this.orders = orders));
-
-    this.dataSource = new MatTableDataSource(this.orders);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.orderService.getAllOrders().subscribe(orders => {
+      this.dataSource = new MatTableDataSource(orders);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   applyFilter(filterValue: string) {

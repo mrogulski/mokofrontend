@@ -40,6 +40,10 @@ export class AuthenticationService {
     );
   }
 
+  public getToken(): string {
+    return localStorage.getItem("access_token");
+  }
+
   public isAuthenticated(): boolean {
     const token = localStorage.getItem("access_token");
     return !this.jwtHelper.isTokenExpired(token);
