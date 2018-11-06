@@ -7,6 +7,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatInputModule } from "@angular/material";
 import { OrdersTableComponent } from "./components/orders-table/orders-table.component";
 import { MatSortModule } from "@angular/material/sort";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { TodayComponent } from './components/today/today.component';
 
 @NgModule({
   imports: [
@@ -15,8 +17,9 @@ import { MatSortModule } from "@angular/material/sort";
     MatFormFieldModule,
     MatPaginatorModule,
     MatInputModule,
-    MatSortModule
+    MatSortModule,
+    MatToolbarModule
   ],
-  declarations: [OrdersComponent, OrdersTableComponent]
+  declarations: [OrdersComponent, OrdersTableComponent, TodayComponent]
 })
 export class OrdersModule {}

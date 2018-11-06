@@ -1,3 +1,7 @@
+<mat-toolbar>
+  <span>{{title}}</span>
+</mat-toolbar>
+
 <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" id="serach" class="md-input-element" placeholder="Search">
 
@@ -27,19 +31,25 @@
     <!-- Rental date Column -->
     <ng-container matColumnDef="rentalDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="rentalDate"> Rental Date </th>
-      <td mat-cell *matCellDef="let order"> {{order.dateFrom}} {{order.dateTo}} </td>
+      <td mat-cell *matCellDef="let order"> {{order.dateFrom}} - {{order.dateTo}} </td>
     </ng-container>
 
     <!-- Bikes Column -->
     <ng-container matColumnDef="bikes">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="bikes"> Bikes </th>
-      <td mat-cell *matCellDef="let order"> Adults bikes: {{order.adultBike}} Child bikes: {{order.childBike}} </td>
+      <td mat-cell *matCellDef="let order">
+        Adults bikes: {{order.adultBike}}<br />
+        Child bikes: {{order.childBike}}
+      </td>
     </ng-container>
 
     <!-- Additions Column -->
     <ng-container matColumnDef="additions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header="additions"> Additions </th>
-      <td mat-cell *matCellDef="let order"> Helmets: {{order.helmet}} Locks: {{order.lock}} </td>
+      <td mat-cell *matCellDef="let order">
+        Helmets: {{order.helmet}}<br />
+        Locks: {{order.lock}}
+      </td>
     </ng-container>
 
     <!-- Pickup Column -->

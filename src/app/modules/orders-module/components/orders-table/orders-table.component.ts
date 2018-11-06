@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import { MatPaginator, MatSort, MatTableDataSource } from "@angular/material";
 import { Order } from "../../model/order";
 import { OrderService } from "../../services/order-service/order.service";
@@ -9,6 +9,11 @@ import { OrderService } from "../../services/order-service/order.service";
   styleUrls: ["./orders-table.component.css"]
 })
 export class OrdersTableComponent implements OnInit {
+  @Input()
+  excludeStatus: string;
+  @Input()
+  title: string;
+
   displayedColumns: string[] = [
     "createdDate",
     "status",
@@ -28,14 +33,18 @@ export class OrdersTableComponent implements OnInit {
   sort: MatSort;
 
   constructor(private orderService: OrderService) {
-    // pobrac zamowienia(narazie wszytskie)
     //https://stackoverflow.com/questions/49446816/angular-5-material-http-data-with-pagination - do paginacji
     //https://blog.angular-university.io/angular-material-data-table/
-    // Assign the data to the data source for the table to render
   }
 
   ngOnInit() {
     this.orderService.getAllOrders().subscribe(orders => {
+      if (this.excludeStatus == undefined) {
+        orders = orders.filter(order => order.status === "completed");
+      } else {
+        orders = orders.filter(order => order.status != this.excludeStatus);
+      }
+
       this.dataSource = new MatTableDataSource(orders);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
