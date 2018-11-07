@@ -1,3 +1,7 @@
-<p>
-  today works!
-</p>
+<mat-toolbar>
+  <span>Today {{date | date :'mediumDate'}}</span>
+  <span>Rent bikes {{availableBikes}}</span>
+  <span>Available bikes {{rentBikes}}</span>
+  <span>Todays Orders {{todaysOrders}}</span>
+  <button mat-fab color="primary">New Order</button>
+</mat-toolbar>

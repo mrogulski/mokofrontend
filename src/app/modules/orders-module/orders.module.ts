@@ -4,11 +4,13 @@ import { OrdersComponent } from "./components/orders/orders.component";
 import { MatTableModule } from "@angular/material/table";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatPaginatorModule } from "@angular/material/paginator";
-import { MatInputModule } from "@angular/material";
+import { MatInputModule, MatButtonModule } from "@angular/material";
 import { OrdersTableComponent } from "./components/orders-table/orders-table.component";
 import { MatSortModule } from "@angular/material/sort";
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { TodayComponent } from './components/today/today.component';
+import { TodayComponent } from "./components/today/today.component";
+import { NewOrderComponent } from "./components/new-order/new-order.component";
+import { AngularFontAwesomeModule } from "angular-font-awesome";
 
 @NgModule({
   imports: [
@@ -18,8 +20,15 @@ import { TodayComponent } from './components/today/today.component';
     MatPaginatorModule,
     MatInputModule,
     MatSortModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatButtonModule,
+    AngularFontAwesomeModule
   ],
-  declarations: [OrdersComponent, OrdersTableComponent, TodayComponent]
+  declarations: [
+    OrdersComponent,
+    OrdersTableComponent,
+    TodayComponent,
+    NewOrderComponent
+  ]
 })
 export class OrdersModule {}

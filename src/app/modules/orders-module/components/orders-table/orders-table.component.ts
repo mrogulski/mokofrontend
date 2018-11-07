@@ -40,9 +40,13 @@ export class OrdersTableComponent implements OnInit {
   ngOnInit() {
     this.orderService.getAllOrders().subscribe(orders => {
       if (this.excludeStatus == undefined) {
-        orders = orders.filter(order => order.status === "completed");
+        orders = orders.filter(
+          order => order.status === "completed" || order.status === "cancelled"
+        );
       } else {
-        orders = orders.filter(order => order.status != this.excludeStatus);
+        orders = orders
+          .filter(order => order.status != this.excludeStatus)
+          .filter(order => order.status != "cancelled");
       }
 
       this.dataSource = new MatTableDataSource(orders);
@@ -57,5 +61,16 @@ export class OrdersTableComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  complete(orderID: number): void {
+    console.log("order " + orderID + " completed");
+  }
+
+  edit(order: Order): void {
+    console.log("editing order numvber " + order.id);
+  }
+  cancel(orderID: number): void {
+    console.log("order " + orderID + " cancelled");
   }
 }

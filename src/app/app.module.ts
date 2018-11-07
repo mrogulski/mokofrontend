@@ -7,10 +7,6 @@ import { LoginComponent } from "./common-components/login/login.component";
 import { AppRoutingModule } from "./modules/app-routing/app-routing.module";
 import { MessagesComponent } from "./common-components/messages/messages.component";
 
-import { AccordionModule } from "primeng/components/accordion/accordion";
-import { PanelModule } from "primeng/components/panel/panel";
-import { ButtonModule } from "primeng/components/button/button";
-import { RadioButtonModule } from "primeng/components/radioButton/radioButton";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -45,11 +41,7 @@ export function tokenGetter() {
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    AccordionModule,
-    PanelModule,
-    ButtonModule,
     MatButtonModule,
-    RadioButtonModule,
     HttpModule,
     HttpClientModule,
     NgbModule,

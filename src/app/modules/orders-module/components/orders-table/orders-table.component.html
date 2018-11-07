@@ -1,89 +1,96 @@
 <mat-toolbar>
-  <span>{{title}}</span>
+    <span>{{title}}</span>
 </mat-toolbar>
 
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" id="serach" class="md-input-element" placeholder="Search">
+    <input matInput (keyup)="applyFilter($event.target.value)" id="serach" class="md-input-element" placeholder="Search">
 
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort matSortActive="createdDate" matSortStart="desc">
+    <table mat-table [dataSource]="dataSource" matSort matSortActive="createdDate" matSortStart="desc">
 
-    <!-- ID Column
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> ID </th>
-      <td mat-cell *matCellDef="let order"> {{order.id}} </td>
-    </ng-container> -->
+        <!-- ID Column
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> ID </th>
+            <td mat-cell *matCellDef="let order"> {{order.id}} </td>
+          </ng-container> -->
 
-    <!-- Created date Column -->
-    <ng-container matColumnDef="createdDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate"> Created Date </th>
-      <td mat-cell *matCellDef="let order"> {{order.createdDate}} </td>
-    </ng-container>
+        <!-- Created date Column -->
+        <ng-container matColumnDef="createdDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="createdDate"> Created Date </th>
+            <td mat-cell *matCellDef="let order"> {{order.createdDate}} </td>
+        </ng-container>
 
-    <!-- Status Column -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="status"> status </th>
-      <td mat-cell *matCellDef="let order"> {{order.status}} </td>
-    </ng-container>
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="status"> status </th>
+            <td mat-cell *matCellDef="let order"> {{order.status}} </td>
+        </ng-container>
 
-    <!-- Rental date Column -->
-    <ng-container matColumnDef="rentalDate">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="rentalDate"> Rental Date </th>
-      <td mat-cell *matCellDef="let order"> {{order.dateFrom}} - {{order.dateTo}} </td>
-    </ng-container>
+        <!-- Rental date Column -->
+        <ng-container matColumnDef="rentalDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="rentalDate"> Rental Date </th>
+            <td mat-cell *matCellDef="let order"> {{order.dateFrom}} - {{order.dateTo}} </td>
+        </ng-container>
 
-    <!-- Bikes Column -->
-    <ng-container matColumnDef="bikes">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="bikes"> Bikes </th>
-      <td mat-cell *matCellDef="let order">
-        Adults bikes: {{order.adultBike}}<br />
-        Child bikes: {{order.childBike}}
-      </td>
-    </ng-container>
+        <!-- Bikes Column -->
+        <ng-container matColumnDef="bikes">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="bikes"> Bikes </th>
+            <td mat-cell *matCellDef="let order">
+                Adults bikes: {{order.adultBike}}<br />
+                Child bikes: {{order.childBike}}
+            </td>
+        </ng-container>
 
-    <!-- Additions Column -->
-    <ng-container matColumnDef="additions">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="additions"> Additions </th>
-      <td mat-cell *matCellDef="let order">
-        Helmets: {{order.helmet}}<br />
-        Locks: {{order.lock}}
-      </td>
-    </ng-container>
+        <!-- Additions Column -->
+        <ng-container matColumnDef="additions">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="additions"> Additions </th>
+            <td mat-cell *matCellDef="let order">
+                Helmets: {{order.helmet}}<br />
+                Locks: {{order.lock}}
+            </td>
+        </ng-container>
 
-    <!-- Pickup Column -->
-    <ng-container matColumnDef="pickup">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="pickup"> Pickup </th>
-      <td mat-cell *matCellDef="let order">
-        From: {{order.pickupFrom}} <br />
-        To: {{order.pickupTo}}<br />
-        Distance: {{order.pickupDistance}}
-      </td>
-    </ng-container>
+        <!-- Pickup Column -->
+        <ng-container matColumnDef="pickup">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="pickup"> Pickup </th>
+            <td mat-cell *matCellDef="let order">
+                From: {{order.pickupFrom}} <br />
+                To: {{order.pickupTo}}<br />
+                Distance: {{order.pickupDistance}}
+            </td>
+        </ng-container>
 
-    <!-- Price Column -->
-    <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="price"> Price </th>
-      <td mat-cell *matCellDef="let order"> Cost: {{order.finalValue}}</td>
-    </ng-container>
+        <!-- Price Column -->
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="price"> Price </th>
+            <td mat-cell *matCellDef="let order"> Cost: {{order.finalValue}}</td>
+        </ng-container>
 
-    <!-- User Column -->
-    <ng-container matColumnDef="user">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header="user"> User </th>
-      <td mat-cell *matCellDef="let order"> {{order.user.firstName}} {{order.user.lastName}} </td>
-    </ng-container>
+        <!-- User Column -->
+        <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="user"> User </th>
+            <td mat-cell *matCellDef="let order"> {{order.user.firstName}} {{order.user.lastName}} </td>
+        </ng-container>
 
-    <!-- Edit Column -->
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef> Edit </th>
-      <td mat-cell *matCellDef="let order"> <button mat-raised-button>Edytuj</button> </td>
-    </ng-container>
+        <!-- Edit Column -->
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef> Edit </th>
+            <td mat-cell *matCellDef="let order">
+                <fa name="check-circle" size="2x" (click)="complete(order.id)"></fa>
+                <fa name="edit" size="2x" (click)="edit(order)"></fa>
+                <fa name="ban" size="2x" (click)="cancel(order.id)"></fa>
+            </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let order; columns: displayedColumns;">
-    </tr>
-  </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let order; columns: displayedColumns;" [ngClass]="{
+            'bg-warning': order.status === 'new',
+            'bg-light': order.status === 'cancelled'
+        }">
+        </tr>
+    </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 </div>
