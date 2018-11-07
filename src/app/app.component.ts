@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { AuthGuardService } from "./services/auth-guard-service/auth-guard.service";
 
 @Component({
   selector: "app-root",
@@ -7,4 +8,10 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   title = "mokofrontend";
+  canActivate: boolean;
+
+  constructor(authguard: AuthGuardService){
+    this.canActivate = authguard.canActivate();
+
+  }
 }
