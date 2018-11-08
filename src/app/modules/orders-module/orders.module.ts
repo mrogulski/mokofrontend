@@ -13,6 +13,7 @@ import { TodayComponent } from "./components/today/today.component";
 import { NewOrderComponent } from "./components/new-order/new-order.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { OrderFormComponent } from "./components/order-form/order-form.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
@@ -25,7 +26,9 @@ import { OrderFormComponent } from "./components/order-form/order-form.component
     MatToolbarModule,
     MatButtonModule,
     MatDialogModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     OrdersComponent,

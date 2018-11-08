@@ -1,11 +1,19 @@
 <h1 mat-dialog-title>Order number {{data.id}}</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field>
-    <input matInput>
-  </mat-form-field>
+  <form class="example-container" [formGroup]="orderForm">
+
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth</label>
+      <input id="dateOfBirth" name="dateOfBirth" [(ngModel)]="data.dateFrom" type="datetime-local" bsDatepicker class="form-control"
+        formControlName="dateFrom" />
+    </div>
+
+    <mat-form-field>
+      <input matInput type="number" placeholder="Bikes amount" formControlName="adultBikes" [(ngModel)]="data.adultBike">
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.order" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.order" cdkFocusInitial (click)="save(data)">Ok</button>
 </div>

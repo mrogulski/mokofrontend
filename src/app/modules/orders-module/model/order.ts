@@ -3,9 +3,9 @@ import { User } from "../../users-module/model/user";
 export class Order {
   id: number;
   status: string;
-  createdDate: Date;
-  dateFrom: Date;
-  dateTo: Date;
+  createdDate: string;
+  dateFrom: string;
+  dateTo: string;
   user: User;
   adultBike: number;
   childBike: number;
