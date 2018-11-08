@@ -8,9 +8,11 @@ import { MatInputModule, MatButtonModule } from "@angular/material";
 import { OrdersTableComponent } from "./components/orders-table/orders-table.component";
 import { MatSortModule } from "@angular/material/sort";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatDialogModule } from "@angular/material/dialog";
 import { TodayComponent } from "./components/today/today.component";
 import { NewOrderComponent } from "./components/new-order/new-order.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
+import { OrderFormComponent } from "./components/order-form/order-form.component";
 
 @NgModule({
   imports: [
@@ -22,13 +24,16 @@ import { AngularFontAwesomeModule } from "angular-font-awesome";
     MatSortModule,
     MatToolbarModule,
     MatButtonModule,
+    MatDialogModule,
     AngularFontAwesomeModule
   ],
   declarations: [
     OrdersComponent,
     OrdersTableComponent,
     TodayComponent,
-    NewOrderComponent
-  ]
+    NewOrderComponent,
+    OrderFormComponent
+  ],
+  entryComponents: [OrderFormComponent]
 })
 export class OrdersModule {}

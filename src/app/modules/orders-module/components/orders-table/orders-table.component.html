@@ -10,11 +10,11 @@
 <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort matSortActive="createdDate" matSortStart="desc">
 
-        <!-- ID Column
-          <ng-container matColumnDef="id">
+        <!-- ID Column-->
+        <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="id"> ID </th>
             <td mat-cell *matCellDef="let order"> {{order.id}} </td>
-          </ng-container> -->
+        </ng-container>
 
         <!-- Created date Column -->
         <ng-container matColumnDef="createdDate">
@@ -78,15 +78,9 @@
         <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef> Edit </th>
             <td mat-cell *matCellDef="let order">
-                <button>
-                    <fa name="check-circle" size="2x" (click)="complete(order.id)"></fa>
-                </button>
-                <button>
-                    <fa name="edit" size="2x" (click)="edit(order)"></fa>
-                </button>
-                <button>
-                    <fa name="ban" size="2x" (click)="cancel(order.id)"></fa>
-                </button>
+                <fa name="check-circle" size="2x" (click)="complete(order)"></fa>
+                <fa name="edit" size="2x" (click)="edit(order)"></fa>
+                <fa name="ban" size="2x" (click)="cancel(order.id)"></fa>
             </td>
         </ng-container>
 

@@ -33,4 +33,29 @@ export class OrderService {
   getTodaysOrders(): Observable<Order[]> {
     return null;
   }
+
+  complete(order: Order) {
+    order.status = "completed";
+    console.log("order to update " + order);
+    return this.http.patch(
+      this.API_URL + `/orders/${order.id}`,
+      order,
+      this.httpOptions
+    );
+  }
+
+  edit(order: Order) {
+    return this.http.patch(
+      this.API_URL + `/orders/${order.id}`,
+      order,
+      this.httpOptions
+    );
+  }
+
+  cancel(orderID: number) {
+    return this.http.delete(
+      this.API_URL + `/orders/${orderID}`,
+      this.httpOptions
+    );
+  }
 }

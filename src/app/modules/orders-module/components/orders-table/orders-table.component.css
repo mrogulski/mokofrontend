@@ -14,4 +14,9 @@ th {
 
 fa {
   padding-right: 5px;
+  color: rgba(51, 48, 48, 0.87);
+}
+fa:hover {
+  color: black;
+  cursor: pointer;
 }
