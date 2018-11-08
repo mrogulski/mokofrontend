@@ -16,6 +16,7 @@ export class OrderFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Order,
     formBuilder: FormBuilder
   ) {
+    data.dateFrom = new Date(data.dateFrom);
     this.orderForm = formBuilder.group({
       dateFrom: data.dateFrom,
       adultBikes: [Validators.min(1)]
