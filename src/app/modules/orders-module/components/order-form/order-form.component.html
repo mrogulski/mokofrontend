@@ -1,19 +1,100 @@
-<h1 mat-dialog-title>Order number {{data.id}}</h1>
+<h1 mat-dialog-title>Order number {{ data.id }}</h1>
 <div mat-dialog-content>
   <form class="example-container" [formGroup]="orderForm">
-
-    <div class="form-group">
-      <label for="dateOfBirth">Date of Birth</label>
-      <input id="dateOfBirth" name="dateOfBirth" [(ngModel)]="data.dateFrom" type="datetime-local" bsDatepicker class="form-control"
-        formControlName="dateFrom" />
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="dateFrom">Date from</label>
+          <input
+            id="dateFrom"
+            name="dateFrom"
+            [(ngModel)]="data.dateFrom"
+            type="datetime-local"
+            bsDatepicker
+            class="form-control"
+            formControlName="dateFrom"
+          />
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="dateTo">Date to</label>
+          <input
+            id="dateTo"
+            name="dateTo"
+            [(ngModel)]="data.dateTo"
+            type="datetime-local"
+            bsDatepicker
+            class="form-control"
+            formControlName="dateTo"
+          />
+        </div>
+      </div>
     </div>
-
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <label for="adultBikes">How many adults bike do you want?</label>
+          <input
+            matInput
+            id="adultBikes"
+            name="adultBikes"
+            type="number"
+            formControlName="adultBikes"
+            [(ngModel)]="data.adultBike"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <label for="childtBikes">How many childs bike do you want?</label>
+          <input
+            matInput
+            id="childtBikes"
+            name="childtBikes"
+            type="number"
+            formControlName="childtBikes"
+            [(ngModel)]="data.childBike"
+          />
+        </mat-form-field>
+      </div>
+    </div>
     <mat-form-field>
-      <input matInput type="number" placeholder="Bikes amount" formControlName="adultBikes" [(ngModel)]="data.adultBike">
+      <mat-select
+        placeholder="status"
+        [(ngModel)]="data.status"
+        id="status"
+        name="status"
+        formControlName="status"
+      >
+        <mat-option *ngFor="let status of statuses" [value]="status">
+          {{ status }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
+    <div class="form-group">
+      <label for="createdDate">Creation date</label>
+      <input
+        id="createdDate"
+        name="createdDate"
+        [(ngModel)]="data.createdDate"
+        type="datetime-local"
+        bsDatepicker
+        class="form-control"
+        formControlName="createdDate"
+        disabled
+      />
+    </div>
   </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.order" cdkFocusInitial (click)="save(data)">Ok</button>
+  <button
+    mat-button
+    [mat-dialog-close]="data.order"
+    cdkFocusInitial
+    (click)="save(data)"
+  >
+    Ok
+  </button>
 </div>

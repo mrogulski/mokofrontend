@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material";
 import { OrderFormComponent } from "../order-form/order-form.component";
 import { Order } from "../../model/order";
+import * as moment from "moment";
+import { DATE_FORMAT } from "../../../../../environments/environment";
 
 @Component({
   selector: "app-today",
@@ -44,7 +46,7 @@ export class TodayComponent implements OnInit {
 
   newOrder() {
     this.order.status = "new";
-    this.order.createdDate = new Date().toISOString();
+    this.order.createdDate = moment().format(DATE_FORMAT);
     const dialogRef = this.dialog.open(OrderFormComponent, {
       data: this.order
     });

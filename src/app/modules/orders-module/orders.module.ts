@@ -14,6 +14,7 @@ import { NewOrderComponent } from "./components/new-order/new-order.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { OrderFormComponent } from "./components/order-form/order-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     MatDialogModule,
     AngularFontAwesomeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   declarations: [
     OrdersComponent,
