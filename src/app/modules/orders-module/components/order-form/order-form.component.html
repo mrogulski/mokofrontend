@@ -40,6 +40,10 @@
         name="user"
         formControlName="user"
       >
+        <ngx-mat-select-search
+          [formControl]="userFilterCtrl"
+          [noEntriesFoundLabel]="'no matching users found'"
+        ></ngx-mat-select-search>
         <mat-option *ngFor="let user of users" [value]="user">
           {{ user.firstName + " " + user.lastName }}
         </mat-option>

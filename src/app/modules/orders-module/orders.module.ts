@@ -15,6 +15,7 @@ import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { OrderFormComponent } from "./components/order-form/order-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
+import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { MatSelectModule } from "@angular/material/select";
     AngularFontAwesomeModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxMatSelectSearchModule
   ],
   declarations: [
     OrdersComponent,

@@ -7,6 +7,13 @@ import { DATE_FORMAT } from "../../../../../environments/environment";
 import { UsersService } from "../../../users-module/services/users-service/users.service";
 import { User } from "../../../users-module/model/user";
 
+import { FormControl } from "@angular/forms";
+
+import { ReplaySubject } from "rxjs";
+import { Subject } from "rxjs";
+import { take } from "rxjs/operators";
+import { takeUntil } from "rxjs/operators";
+
 @Component({
   selector: "app-order-form",
   templateUrl: "./order-form.component.html",
@@ -17,6 +24,13 @@ export class OrderFormComponent implements OnInit {
   statuses: String[] = ["new", "in progress", "completed", "cancelled"];
   users: User[];
   selected = this.data.user;
+  public userFilterCtrl: FormControl = new FormControl();
+
+  /** list of users filtered by search keyword */
+  public filteredUsers: ReplaySubject<User[]> = new ReplaySubject<User[]>(1);
+
+  private _onDestroy = new Subject<void>();
+
   constructor(
     public dialogRef: MatDialogRef<OrderFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Order,
@@ -39,6 +53,17 @@ export class OrderFormComponent implements OnInit {
 
   ngOnInit() {
     this.getAllUsers();
+    // listen for search field value changes
+    this.userFilterCtrl.valueChanges
+      .pipe(takeUntil(this._onDestroy))
+      .subscribe(() => {
+        this.filterUsers();
+      });
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
+    this._onDestroy.complete();
   }
 
   save(order: Order) {
@@ -51,6 +76,36 @@ export class OrderFormComponent implements OnInit {
 
   getAllUsers() {
     this.usersService.getAllUsers().subscribe(users => (this.users = users));
+  }
+
+  private filterUsers() {
+    if (!this.users) {
+      return;
+    }
+    // get the search keyword
+    let search = this.userFilterCtrl.value;
+    if (!search) {
+      this.filteredUsers.next(this.users.slice());
+      this.getAllUsers();
+      return;
+    } else {
+      search = search.toLowerCase();
+    }
+    // filter the users
+    this.filteredUsers.next(
+      (this.users = this.users.filter(
+        user => user.firstName.toLowerCase().indexOf(search) > -1
+      ))
+    );
+
+    console.log(
+      " filtrowanie " +
+        this.filteredUsers.next(
+          this.users.filter(
+            user => user.firstName.toLowerCase().indexOf(search) > -1
+          )
+        )
+    );
   }
 
   //to fix pre-select issue https://github.com/angular/material2/issues/8212
