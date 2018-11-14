@@ -11,18 +11,21 @@ import { Observable } from "rxjs";
 export class UsersService {
   private API_URL = environment.API_URL;
   private access_token: string;
+  private httpOptions: {};
 
   constructor(
     private http: HttpClient,
     private authenticationService: AuthenticationService
-  ) {}
-
-  getAllUsers(): Observable<User[]> {
-    const httpOptions = {
+  ) {
+    this.access_token = this.authenticationService.getToken();
+    this.httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.access_token}`
       })
     };
-    return this.http.get<User[]>(this.API_URL + "/users", httpOptions);
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.API_URL + "/users", this.httpOptions);
   }
 }

@@ -31,6 +31,20 @@
         </div>
       </div>
     </div>
+    <mat-form-field>
+      <mat-select
+        [compareWith]="compareFn"
+        placeholder="user"
+        [(ngModel)]="data.user"
+        id="user"
+        name="user"
+        formControlName="user"
+      >
+        <mat-option *ngFor="let user of users" [value]="user">
+          {{ user.firstName + " " + user.lastName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <div class="row">
       <div class="col">
         <mat-form-field>
@@ -47,13 +61,13 @@
       </div>
       <div class="col">
         <mat-form-field>
-          <label for="childtBikes">How many childs bike do you want?</label>
+          <label for="childBikes">How many childs bike do you want?</label>
           <input
             matInput
-            id="childtBikes"
-            name="childtBikes"
+            id="childBikes"
+            name="childBikes"
             type="number"
-            formControlName="childtBikes"
+            formControlName="childBikes"
             [(ngModel)]="data.childBike"
           />
         </mat-form-field>
