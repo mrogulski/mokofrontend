@@ -77,6 +77,11 @@ export class OrderFormComponent implements OnInit {
   getAllUsers() {
     this.usersService.getAllUsers().subscribe(users => (this.users = users));
   }
+  filterUsersServerSide(search: string) {
+    this.usersService
+      .getFilteredUsers(search)
+      .subscribe(users => (this.users = users));
+  }
 
   private filterUsers() {
     if (!this.users) {
@@ -85,27 +90,17 @@ export class OrderFormComponent implements OnInit {
     // get the search keyword
     let search = this.userFilterCtrl.value;
     if (!search) {
-      this.filteredUsers.next(this.users.slice());
       this.getAllUsers();
+      console.log("wszytskei usery");
       return;
     } else {
       search = search.toLowerCase();
+      // filter the users
+      //server side
+      this.filterUsersServerSide(search);
+      console.log("szuka userow w bazie");
+      return;
     }
-    // filter the users
-    this.filteredUsers.next(
-      (this.users = this.users.filter(
-        user => user.firstName.toLowerCase().indexOf(search) > -1
-      ))
-    );
-
-    console.log(
-      " filtrowanie " +
-        this.filteredUsers.next(
-          this.users.filter(
-            user => user.firstName.toLowerCase().indexOf(search) > -1
-          )
-        )
-    );
   }
 
   //to fix pre-select issue https://github.com/angular/material2/issues/8212

@@ -28,4 +28,10 @@ export class UsersService {
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.API_URL + "/users", this.httpOptions);
   }
+  getFilteredUsers(search): Observable<User[]> {
+    return this.http.get<User[]>(
+      this.API_URL + `/users?q=${search}`,
+      this.httpOptions
+    );
+  }
 }
