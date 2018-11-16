@@ -11,7 +11,7 @@ import { FormControl } from "@angular/forms";
 
 import { ReplaySubject } from "rxjs";
 import { Subject } from "rxjs";
-import { take } from "rxjs/operators";
+
 import { takeUntil } from "rxjs/operators";
 
 @Component({
@@ -47,7 +47,16 @@ export class OrderFormComponent implements OnInit {
       user: data.user,
       status: data.status,
       adultBikes: [Validators.min(1)],
-      childBikes: [Validators.min(1)]
+      childBikes: [Validators.min(1)],
+      helmet: data.helmet,
+      lock: data.lock,
+      pickup: data.pickup,
+      pickupFrom: data.pickupFrom,
+      pickupTo: data.pickupTo,
+      pickupDistance: data.pickupDistance,
+      pickupValue: [{ value: data.pickupValue }],
+      initialValue: [{ value: data.initialValue }],
+      finalValue: data.finalValue
     });
   }
 

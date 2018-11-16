@@ -15,8 +15,10 @@ import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { OrderFormComponent } from "./components/order-form/order-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatSelectModule } from "@angular/material/select";
+import { MatCheckboxModule } from "@angular/material/checkbox";
 import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
-
+import { MatDividerModule } from "@angular/material/divider";
+//zrobic tu porzadek i  pogrupowac wszystko
 @NgModule({
   imports: [
     CommonModule,
@@ -32,7 +34,9 @@ import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatCheckboxModule,
+    MatDividerModule
   ],
   declarations: [
     OrdersComponent,

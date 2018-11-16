@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>Order number {{ data.id }}</h1>
 <div mat-dialog-content>
   <form class="example-container" [formGroup]="orderForm">
+    <!-- date from date to row -->
     <div class="row">
       <div class="col">
         <div class="form-group">
@@ -13,9 +14,14 @@
             bsDatepicker
             class="form-control"
             formControlName="dateFrom"
+            required
           />
         </div>
+        <span *ngIf="!orderForm.controls['dateFrom'].valid">
+          Invalid date
+        </span>
       </div>
+
       <div class="col">
         <div class="form-group">
           <label for="dateTo">Date to</label>
@@ -29,26 +35,54 @@
             formControlName="dateTo"
           />
         </div>
+        <span *ngIf="!orderForm.controls['dateTo'].valid"> Invalid date </span>
       </div>
     </div>
-    <mat-form-field>
-      <mat-select
-        [compareWith]="compareFn"
-        placeholder="user"
-        [(ngModel)]="data.user"
-        id="user"
-        name="user"
-        formControlName="user"
-      >
-        <ngx-mat-select-search
-          [formControl]="userFilterCtrl"
-          [noEntriesFoundLabel]="'no matching users found'"
-        ></ngx-mat-select-search>
-        <mat-option *ngFor="let user of users" [value]="user">
-          {{ user.firstName + " " + user.lastName }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-divider></mat-divider>
+
+    <!-- user input -->
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-select
+            [compareWith]="compareFn"
+            placeholder="user"
+            [(ngModel)]="data.user"
+            id="user"
+            name="user"
+            formControlName="user"
+          >
+            <ngx-mat-select-search
+              [formControl]="userFilterCtrl"
+              [noEntriesFoundLabel]="'no matching users found'"
+            ></ngx-mat-select-search>
+            <mat-option *ngFor="let user of users" [value]="user">
+              {{ user.firstName + " " + user.lastName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- status picklist -->
+      <div class="col">
+        <mat-form-field>
+          <mat-select
+            placeholder="status"
+            [(ngModel)]="data.status"
+            id="status"
+            name="status"
+            formControlName="status"
+          >
+            <mat-option *ngFor="let status of statuses" [value]="status">
+              {{ status }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <!-- bikes row -->
     <div class="row">
       <div class="col">
         <mat-form-field>
@@ -77,19 +111,144 @@
         </mat-form-field>
       </div>
     </div>
-    <mat-form-field>
-      <mat-select
-        placeholder="status"
-        [(ngModel)]="data.status"
-        id="status"
-        name="status"
-        formControlName="status"
-      >
-        <mat-option *ngFor="let status of statuses" [value]="status">
-          {{ status }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+
+    <!-- locks/helmets row -->
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <label for="helmet">How many helmets do you want?</label>
+          <input
+            matInput
+            id="helmet"
+            name="helmet"
+            type="number"
+            formControlName="helmet"
+            [(ngModel)]="data.helmet"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <label for="lock">How many locks do you want?</label>
+          <input
+            matInput
+            id="lock"
+            name="lock"
+            type="number"
+            formControlName="lock"
+            [(ngModel)]="data.lock"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row">
+      <div class="col">
+        <mat-checkbox
+          class="example-margin"
+          [(ngModel)]="data.pickup"
+          name="pickup"
+          formControlName="pickup"
+        >
+          Pickup
+        </mat-checkbox>
+      </div>
+      <div class="col">
+        <mat-checkbox *ngIf="data.pickup" class="example-margin">
+          Same pickup address to/from
+        </mat-checkbox>
+      </div>
+    </div>
+    <div *ngIf="data.pickup">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="example-full-width">
+            <textarea
+              matInput
+              placeholder="Pickup from"
+              [(ngModel)]="data.pickupFrom"
+              formControlName="pickupFrom"
+            ></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="example-full-width">
+            <textarea
+              matInput
+              placeholder="Pickup to"
+              [(ngModel)]="data.pickupTo"
+              formControlName="pickupTo"
+            ></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <label for="pickupDistance">Pickup distance</label>
+            <input
+              matInput
+              id="pickupDistance"
+              name="pickupDistance"
+              type="number"
+              formControlName="pickupDistance"
+              [(ngModel)]="data.pickupDistance"
+            />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <label for="pickupValue">Pickup value</label>
+            <input
+              matInput
+              id="pickupValue"
+              name="pickupValue"
+              type="number"
+              formControlName="pickupValue"
+              [(ngModel)]="data.pickupValue"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <!-- costs -->
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <label for="initialValue">Initial value</label>
+          <input
+            matInput
+            id="initialValue"
+            name="initialValue"
+            #initialValue
+            type="number"
+            formControlName="initialValue"
+            [(ngModel)]="data.initialValue"
+          />
+          <!-- todo zrobic disable warunkowo na nowe i istniejace zamowienia -->
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field>
+          <label for="finalValue">Final value</label>
+          <input
+            matInput
+            id="finalValue"
+            name="finalValue"
+            type="number"
+            formControlName="finalValue"
+            [(ngModel)]="data.finalValue"
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+
+    <!-- creation date -->
     <div class="form-group">
       <label for="createdDate">Creation date</label>
       <input
@@ -112,6 +271,7 @@
     [mat-dialog-close]="data.order"
     cdkFocusInitial
     (click)="save(data)"
+    [disabled]="orderForm.valid"
   >
     Ok
   </button>

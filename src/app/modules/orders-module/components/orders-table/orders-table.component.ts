@@ -61,7 +61,7 @@ export class OrdersTableComponent implements OnInit {
   }
 
   edit(order: Order): void {
-    console.log("editing order numvber " + order.id);
+    console.log("editing order numvber " + JSON.stringify(order));
     const dialogRef = this.dialog.open(OrderFormComponent, {
       data: order
     });
