@@ -6,7 +6,7 @@ export class Order {
   createdDate: string;
   dateFrom: string;
   dateTo: string;
-  user: User;
+  user: number;
   adultBike: number;
   childBike: number;
   helmet: number;

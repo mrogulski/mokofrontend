@@ -56,7 +56,7 @@
               [formControl]="userFilterCtrl"
               [noEntriesFoundLabel]="'no matching users found'"
             ></ngx-mat-select-search>
-            <mat-option *ngFor="let user of users" [value]="user">
+            <mat-option *ngFor="let user of users" [value]="user.id">
               {{ user.firstName + " " + user.lastName }}
             </mat-option>
           </mat-select>
@@ -271,7 +271,6 @@
     [mat-dialog-close]="data.order"
     cdkFocusInitial
     (click)="save(data)"
-    [disabled]="orderForm.valid"
   >
     Ok
   </button>

@@ -34,4 +34,8 @@ export class UsersService {
       this.httpOptions
     );
   }
+
+  findByID(id: number): Observable<User> {
+    return this.http.get<User>(this.API_URL + `/users/${id}`, this.httpOptions);
+  }
 }

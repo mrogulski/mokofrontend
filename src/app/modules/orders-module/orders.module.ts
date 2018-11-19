@@ -18,6 +18,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { NgxMatSelectSearchModule } from "ngx-mat-select-search";
 import { MatDividerModule } from "@angular/material/divider";
+import { UserPipe } from "./pipes/userPipe";
 //zrobic tu porzadek i  pogrupowac wszystko
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { MatDividerModule } from "@angular/material/divider";
     OrdersTableComponent,
     TodayComponent,
     NewOrderComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    UserPipe
   ],
   entryComponents: [OrderFormComponent]
 })

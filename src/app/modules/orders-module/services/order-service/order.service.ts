@@ -34,6 +34,10 @@ export class OrderService {
     return null;
   }
 
+  save(order: Order) {
+    return this.http.post(this.API_URL + "/ordres", order, this.httpOptions);
+  }
+
   complete(order: Order) {
     order.status = "completed";
     console.log("order to update " + order);
