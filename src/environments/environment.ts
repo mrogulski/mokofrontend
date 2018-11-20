@@ -10,6 +10,7 @@ export const environment = {
 };
 
 export const DATE_FORMAT = "YYYY-MM-DD[T]HH:mm";
+export const SAVE_DATE_FORMAT = "YYYY-MM-DD[T]HH:mm:ss";
 
 /*
  * For easier debugging in development mode, you can import the following file

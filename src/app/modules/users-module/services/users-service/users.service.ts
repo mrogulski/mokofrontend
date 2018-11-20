@@ -12,6 +12,7 @@ export class UsersService {
   private API_URL = environment.API_URL;
   private access_token: string;
   private httpOptions: {};
+  private httpOptionsString: {};
 
   constructor(
     private http: HttpClient,
@@ -21,6 +22,12 @@ export class UsersService {
     this.httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.access_token}`
+      })
+    };
+    this.httpOptionsString = {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${this.access_token}`,
+        responseType: "text"
       })
     };
   }
@@ -37,5 +44,18 @@ export class UsersService {
 
   findByID(id: number): Observable<User> {
     return this.http.get<User>(this.API_URL + `/users/${id}`, this.httpOptions);
+  }
+
+  findFullName(id: number): Observable<string> {
+    return this.http.get<string>(
+      this.API_URL + `/users/${id}/fullname`,
+
+      {
+        headers: new HttpHeaders()
+          .set("Authorization", `Bearer ${this.access_token}`)
+          .set("Content-Type", "application/json")
+          .set("responseType", "text")
+      }
+    );
   }
 }

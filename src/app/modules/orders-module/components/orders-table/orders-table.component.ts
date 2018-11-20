@@ -25,7 +25,7 @@ export class OrdersTableComponent implements OnInit {
     "additions",
     "pickup",
     "price",
-    "user",
+    // "user",
     "edit"
   ];
   dataSource: MatTableDataSource<Order>;

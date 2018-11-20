@@ -3,7 +3,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { Order } from "../../model/order";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import * as moment from "moment";
-import { DATE_FORMAT } from "../../../../../environments/environment";
+import {
+  DATE_FORMAT,
+  SAVE_DATE_FORMAT
+} from "../../../../../environments/environment";
 import { UsersService } from "../../../users-module/services/users-service/users.service";
 import { User } from "../../../users-module/model/user";
 
@@ -13,6 +16,7 @@ import { ReplaySubject } from "rxjs";
 import { Subject } from "rxjs";
 
 import { takeUntil } from "rxjs/operators";
+import { OrderService } from "../../services/order-service/order.service";
 
 @Component({
   selector: "app-order-form",
@@ -32,10 +36,11 @@ export class OrderFormComponent implements OnInit {
   private _onDestroy = new Subject<void>();
 
   constructor(
-    public dialogRef: MatDialogRef<OrderFormComponent>,
+    private dialogRef: MatDialogRef<OrderFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Order,
     formBuilder: FormBuilder,
-    public usersService: UsersService
+    private usersService: UsersService,
+    private orderService: OrderService
   ) {
     data.createdDate = moment(data.createdDate).format(DATE_FORMAT);
     data.dateFrom = moment(data.dateFrom).format(DATE_FORMAT);
@@ -76,7 +81,15 @@ export class OrderFormComponent implements OnInit {
   }
 
   save(order: Order) {
-    console.log(JSON.stringify(order));
+    order.createdDate = String(
+      moment(order.createdDate).format(SAVE_DATE_FORMAT)
+    );
+    order.dateFrom = String(moment(order.dateFrom).format(SAVE_DATE_FORMAT));
+    order.dateTo = String(moment(order.dateTo).format(SAVE_DATE_FORMAT));
+    console.log(" order to save " + JSON.stringify(order));
+    this.orderService
+      .save(order)
+      .subscribe(data => console.log(" order saved " + data));
   }
 
   onNoClick(): void {

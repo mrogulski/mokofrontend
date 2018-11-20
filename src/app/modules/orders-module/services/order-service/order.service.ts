@@ -35,7 +35,7 @@ export class OrderService {
   }
 
   save(order: Order) {
-    return this.http.post(this.API_URL + "/ordres", order, this.httpOptions);
+    return this.http.post(this.API_URL + "/orders", order, this.httpOptions);
   }
 
   complete(order: Order) {
