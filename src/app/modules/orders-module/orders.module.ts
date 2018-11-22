@@ -10,7 +10,6 @@ import { MatSortModule } from "@angular/material/sort";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatDialogModule } from "@angular/material/dialog";
 import { TodayComponent } from "./components/today/today.component";
-import { NewOrderComponent } from "./components/new-order/new-order.component";
 import { AngularFontAwesomeModule } from "angular-font-awesome";
 import { OrderFormComponent } from "./components/order-form/order-form.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -43,7 +42,6 @@ import { UserPipe } from "./pipes/userPipe";
     OrdersComponent,
     OrdersTableComponent,
     TodayComponent,
-    NewOrderComponent,
     OrderFormComponent,
     UserPipe
   ],
