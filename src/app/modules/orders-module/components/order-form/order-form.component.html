@@ -14,12 +14,8 @@
             bsDatepicker
             class="form-control"
             formControlName="dateFrom"
-            required
           />
         </div>
-        <span *ngIf="!orderForm.controls['dateFrom'].valid">
-          Invalid date
-        </span>
       </div>
 
       <div class="col">
@@ -35,9 +31,10 @@
             formControlName="dateTo"
           />
         </div>
-        <span *ngIf="!orderForm.controls['dateTo'].valid"> Invalid date </span>
       </div>
     </div>
+    <span *ngIf="dateError">Date path must match DD.MM.RRRR HH:MM. </span>
+    <!-- TODO - poprawic ta walidacje uzywajac formbuilder albo cos -->
     <mat-divider></mat-divider>
 
     <!-- user input -->
@@ -266,12 +263,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button
-    mat-button
-    [mat-dialog-close]="data.order"
-    cdkFocusInitial
-    (click)="save(data)"
-  >
-    Ok
-  </button>
+  <button mat-button (click)="save(data)">Ok</button>
 </div>

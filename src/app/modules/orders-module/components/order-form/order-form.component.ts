@@ -29,6 +29,7 @@ export class OrderFormComponent implements OnInit {
   users: User[];
   selected = this.data.user;
   public userFilterCtrl: FormControl = new FormControl();
+  dateError: boolean = false;
 
   /** list of users filtered by search keyword */
   public filteredUsers: ReplaySubject<User[]> = new ReplaySubject<User[]>(1);
@@ -87,9 +88,24 @@ export class OrderFormComponent implements OnInit {
     order.dateFrom = String(moment(order.dateFrom).format(SAVE_DATE_FORMAT));
     order.dateTo = String(moment(order.dateTo).format(SAVE_DATE_FORMAT));
     console.log(" order to save " + JSON.stringify(order));
-    this.orderService
-      .save(order)
-      .subscribe(data => console.log(" order saved " + data));
+    if (order.dateFrom === "Invalid date" || order.dateTo === "Invalid date") {
+      console.log("invalid date w chuj");
+      this.dateError = true;
+    } else {
+      if (order.id) {
+        console.log("wysyłamy di edycji " + order.id);
+        this.orderService.edit(order).subscribe(data => {
+          console.log(" order updated " + data);
+          this.dialogRef.close();
+        });
+        this.dialogRef.close();
+      } else {
+        this.orderService.save(order).subscribe(data => {
+          console.log(" order saved " + data);
+          this.dialogRef.close();
+        });
+      }
+    }
   }
 
   onNoClick(): void {
