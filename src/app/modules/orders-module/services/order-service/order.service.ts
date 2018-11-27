@@ -62,4 +62,34 @@ export class OrderService {
       this.httpOptions
     );
   }
+
+  getRentBikes(date: Date) {
+    return this.http.get(this.API_URL + `/bikes/${date}`, this.httpOptions);
+  }
+
+  getAvailableBikes(
+    dateFrom: string,
+    dateTo: string,
+    type: string
+  ): Observable<Number> {
+    return this.http.get<Number>(
+      this.API_URL +
+        `/bikes/availability?dateFrom=${dateFrom}&dateTo=${dateTo}&type=${type}`,
+      this.httpOptions
+    );
+  }
+
+  getBikesTotal(type?: String): Observable<Number> {
+    if (type) {
+      return this.http.get<Number>(
+        this.API_URL + `/bikes/total?type=${type}`,
+        this.httpOptions
+      );
+    } else {
+      return this.http.get<Number>(
+        this.API_URL + `/bikes/total`,
+        this.httpOptions
+      );
+    }
+  }
 }

@@ -4,6 +4,8 @@ import { OrderFormComponent } from "../order-form/order-form.component";
 import { Order } from "../../model/order";
 import * as moment from "moment";
 import { DATE_FORMAT } from "../../../../../environments/environment";
+import { OrderService } from "../../services/order-service/order.service";
+import { SAVE_DATE_FORMAT } from "../../../../../environments/environment";
 
 @Component({
   selector: "app-today",
@@ -12,9 +14,14 @@ import { DATE_FORMAT } from "../../../../../environments/environment";
 })
 export class TodayComponent implements OnInit {
   date: Date;
-  rentBikes: number;
-  availableBikes: number;
-  todaysOrders: number;
+  bikesTotal: Number;
+  rentChildBikes: Number;
+  rentAdultBikes: Number;
+  availableChildBikes: Number;
+  availableAdultBikes: Number;
+  childBikesTotal: Number;
+  adultBikesTotal: Number;
+  todaysOrders: Number;
   order: Order = {
     id: null,
     status: null,
@@ -34,14 +41,37 @@ export class TodayComponent implements OnInit {
     initialValue: null,
     finalValue: null
   };
+  start = moment()
+    .startOf("day")
+    .format(SAVE_DATE_FORMAT);
+  end = moment()
+    .endOf("day")
+    .format(SAVE_DATE_FORMAT);
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private orderService: OrderService) {}
 
   ngOnInit() {
     this.date = new Date();
-    this.rentBikes = 2;
-    this.availableBikes = 10;
     this.todaysOrders = 12;
+    this.orderService
+      .getAvailableBikes(this.start, this.end, "CHILD")
+      .subscribe(data => {
+        this.availableChildBikes = data;
+      });
+    this.orderService
+      .getAvailableBikes(this.start, this.end, "ADULT")
+      .subscribe(data => {
+        this.availableAdultBikes = data;
+      });
+    this.orderService
+      .getBikesTotal()
+      .subscribe(data => (this.bikesTotal = data));
+    this.orderService
+      .getBikesTotal("CHILD")
+      .subscribe(data => (this.childBikesTotal = data));
+    this.orderService
+      .getBikesTotal("ADULT")
+      .subscribe(data => (this.adultBikesTotal = data));
   }
 
   newOrder() {

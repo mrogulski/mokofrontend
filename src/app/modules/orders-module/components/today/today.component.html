@@ -1,7 +1,11 @@
 <mat-toolbar>
-  <span>Today {{date | date :'mediumDate'}}</span>
-  <span>Rent bikes {{availableBikes}}</span>
-  <span>Available bikes {{rentBikes}}</span>
-  <span>Todays Orders {{todaysOrders}}</span>
+  <span>Today {{ date | date: "mediumDate" }}</span>
+
+  <span>Available child bikes {{ availableChildBikes }}</span>
+  <span>Available adult bikes {{ availableAdultBikes }}</span>
+
+  <span>Total child bikes {{ childBikesTotal }}</span>
+  <span>Total adult bikes {{ adultBikesTotal }}</span>
+
   <button mat-fab color="primary" (click)="newOrder()">New Order</button>
 </mat-toolbar>
