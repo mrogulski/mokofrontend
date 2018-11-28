@@ -70,7 +70,6 @@ export class OrdersTableComponent implements OnInit {
     //   console.log('The dialog was closed');
     //   this.order = result;
     // });
-    //one comment to test
   }
   cancel(orderID: number): void {
     this.orderService.cancel(orderID).subscribe(response => {
