@@ -5,6 +5,7 @@ import { Http, Headers } from "@angular/http";
 import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthenticationService } from "../../../../services/authentication-service/authentication.service";
+import { map, filter } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -30,8 +31,11 @@ export class OrderService {
     return this.http.get<Order[]>(this.API_URL + "/orders", this.httpOptions);
   }
 
-  getTodaysOrders(): Observable<Order[]> {
-    return null;
+  getOrdersByDate(start: string, end: string): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      this.API_URL + `/orders/date?start=${start}&end=${end}`,
+      this.httpOptions
+    );
   }
 
   save(order: Order) {

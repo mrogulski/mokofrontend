@@ -1,11 +1,72 @@
 <mat-toolbar>
   <span>Today {{ date | date: "mediumDate" }}</span>
-
-  <span>Available child bikes {{ availableChildBikes }}</span>
-  <span>Available adult bikes {{ availableAdultBikes }}</span>
-
-  <span>Total child bikes {{ childBikesTotal }}</span>
-  <span>Total adult bikes {{ adultBikesTotal }}</span>
-
-  <button mat-fab color="primary" (click)="newOrder()">New Order</button>
+  <button mat-fab color="primary" (click)="newOrder()" class="float-right">
+    New Order
+  </button>
 </mat-toolbar>
+<div mat-dialog-content>
+  <div class="row">
+    <div class="col-xl-3 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex"></div>
+            <div class="media-body text-center">
+              <h3>Todays orders</h3>
+              <span class="float-left">Total: {{ todaysOrders }}</span>
+              <span class="float-right"
+                >In progress: {{ todaysOrdersInProgress }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex"></div>
+            <div class="media-body text-center">
+              <h3>Available bikes</h3>
+              <span class="float-left">Child: {{ availableChildBikes }}</span>
+              <span class="float-right">Adult: {{ availableAdultBikes }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex"></div>
+            <div class="media-body text-center">
+              <h3>Rent bikes</h3>
+              <span class="float-left"
+                >Child: {{ childBikesTotal - availableChildBikes }}</span
+              >
+              <span class="float-right"
+                >Adult: {{ adultBikesTotal - availableAdultBikes }}</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-6 col-12">
+      <div class="card">
+        <div class="card-content">
+          <div class="card-body">
+            <div class="media d-flex"></div>
+            <div class="media-body text-center">
+              <h3>Total bikes</h3>
+              <span class="float-left">Child: {{ childBikesTotal }}</span>
+              <span class="float-right">Adult: {{ adultBikesTotal }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

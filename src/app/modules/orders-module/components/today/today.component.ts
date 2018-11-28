@@ -22,6 +22,7 @@ export class TodayComponent implements OnInit {
   childBikesTotal: Number;
   adultBikesTotal: Number;
   todaysOrders: Number;
+  todaysOrdersInProgress: Number;
   order: Order = {
     id: null,
     status: null,
@@ -52,23 +53,34 @@ export class TodayComponent implements OnInit {
 
   ngOnInit() {
     this.date = new Date();
-    this.todaysOrders = 12;
+
+    this.orderService.getOrdersByDate(this.start, this.end).subscribe(data => {
+      this.todaysOrders = data.length;
+      this.todaysOrdersInProgress = data.filter(
+        order => order.status === "in progress"
+      ).length;
+    });
+
     this.orderService
       .getAvailableBikes(this.start, this.end, "CHILD")
       .subscribe(data => {
         this.availableChildBikes = data;
       });
+
     this.orderService
       .getAvailableBikes(this.start, this.end, "ADULT")
       .subscribe(data => {
         this.availableAdultBikes = data;
       });
+
     this.orderService
       .getBikesTotal()
       .subscribe(data => (this.bikesTotal = data));
+
     this.orderService
       .getBikesTotal("CHILD")
       .subscribe(data => (this.childBikesTotal = data));
+
     this.orderService
       .getBikesTotal("ADULT")
       .subscribe(data => (this.adultBikesTotal = data));
