@@ -12,7 +12,6 @@ export class UsersService {
   private API_URL = environment.API_URL;
   private access_token: string;
   private httpOptions: {};
-  private httpOptionsString: {};
 
   constructor(
     private http: HttpClient,
@@ -22,12 +21,6 @@ export class UsersService {
     this.httpOptions = {
       headers: new HttpHeaders({
         Authorization: `Bearer ${this.access_token}`
-      })
-    };
-    this.httpOptionsString = {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${this.access_token}`,
-        responseType: "text"
       })
     };
   }
@@ -57,5 +50,9 @@ export class UsersService {
           .set("responseType", "text")
       }
     );
+  }
+
+  save(user: User) {
+    return this.http.post(this.API_URL + "/users/new", user, this.httpOptions);
   }
 }

@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Order number {{ data.id }}</h1>
+<div mat-dialog-content>
+  <form class="example-container" [formGroup]="userForm">
+    <!-- first name second name -->
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="firstName">First name</label>
+          <input
+            id="firstName"
+            name="firstName"
+            [(ngModel)]="data.firstName"
+            class="form-control"
+            formControlName="firstName"
+          />
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="form-group">
+          <label for="lastName">Second name</label>
+          <input
+            id="lastName"
+            name="lastName"
+            [(ngModel)]="data.lastName"
+            class="form-control"
+            formControlName="lastName"
+          />
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="save(data)">Ok</button>
+</div>
