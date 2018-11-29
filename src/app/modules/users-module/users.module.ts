@@ -4,9 +4,17 @@ import { UsersComponent } from "./components/users/users.component";
 import { UserFormComponent } from "./components/user-form/user-form.component";
 import { MatInputModule, MatButtonModule } from "@angular/material";
 import { MatDialogModule } from "@angular/material/dialog";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
-  imports: [CommonModule, MatInputModule, MatButtonModule, MatDialogModule],
+  imports: [
+    CommonModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   declarations: [UsersComponent, UserFormComponent],
   entryComponents: [UserFormComponent]
 })

@@ -17,6 +17,8 @@ import { Subject } from "rxjs";
 
 import { takeUntil } from "rxjs/operators";
 import { OrderService } from "../../services/order-service/order.service";
+import { UserFormComponent } from "../../../users-module/components/user-form/user-form.component";
+import { MatDialog } from "@angular/material";
 
 @Component({
   selector: "app-order-form",
@@ -35,13 +37,22 @@ export class OrderFormComponent implements OnInit {
   public filteredUsers: ReplaySubject<User[]> = new ReplaySubject<User[]>(1);
 
   private _onDestroy = new Subject<void>();
+  user: User = {
+    id: null,
+    username: null,
+    firstName: null,
+    lastName: null,
+    email: null
+  };
 
   constructor(
     private dialogRef: MatDialogRef<OrderFormComponent>,
+    private userDialog: MatDialogRef<UserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Order,
     formBuilder: FormBuilder,
     private usersService: UsersService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public dialog: MatDialog
   ) {
     data.createdDate = moment(data.createdDate).format(DATE_FORMAT);
     data.dateFrom = moment(data.dateFrom).format(DATE_FORMAT);
@@ -145,5 +156,15 @@ export class OrderFormComponent implements OnInit {
   //https://angular.io/api/forms/SelectControlValueAccessor
   compareFn(c1: User, c2: User): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  newUser() {
+    const dialogRef = this.dialog.open(UserFormComponent, {
+      data: this.user
+    });
+  }
+  displayID(event) {
+    console.log("odebrano event " + event);
+    this.data.id = event;
   }
 }
