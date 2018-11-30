@@ -10,6 +10,7 @@ import { User } from "../../model/user";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UsersService } from "../../services/users-service/users.service";
+import { UserIDService } from "../../services/userID-service/user-id.service";
 
 @Component({
   selector: "app-user-form",
@@ -24,7 +25,8 @@ export class UserFormComponent implements OnInit {
     private dialogRef: MatDialogRef<UserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: User,
     formBuilder: FormBuilder,
-    private usersService: UsersService
+    private usersService: UsersService,
+    private userIDService: UserIDService
   ) {
     this.userForm = formBuilder.group({
       id: data.id,
@@ -42,8 +44,9 @@ export class UserFormComponent implements OnInit {
     console.log("nowy user " + JSON.stringify(user));
     this.usersService.save(user).subscribe(data => {
       this.userID.emit(JSON.stringify(data));
-      console.log("wysłano user id");
+      this.userIDService.changeMessage(JSON.stringify(data));
     });
+
     this.onNoClick();
   }
 }

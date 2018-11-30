@@ -19,6 +19,7 @@ import { takeUntil } from "rxjs/operators";
 import { OrderService } from "../../services/order-service/order.service";
 import { UserFormComponent } from "../../../users-module/components/user-form/user-form.component";
 import { MatDialog } from "@angular/material";
+import { UserIDService } from "../../../users-module/services/userID-service/user-id.service";
 
 @Component({
   selector: "app-order-form",
@@ -52,7 +53,8 @@ export class OrderFormComponent implements OnInit {
     formBuilder: FormBuilder,
     private usersService: UsersService,
     private orderService: OrderService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private userIDService: UserIDService
   ) {
     data.createdDate = moment(data.createdDate).format(DATE_FORMAT);
     data.dateFrom = moment(data.dateFrom).format(DATE_FORMAT);
@@ -85,6 +87,15 @@ export class OrderFormComponent implements OnInit {
       .subscribe(() => {
         this.filterUsers();
       });
+    this.userIDService.currentMessage.subscribe(message => {
+      //do poprawy
+      if (message === "NaN") {
+        console.log("otrzymany user id " + message);
+      } else {
+        this.data.user = Number(message);
+        console.log("otrzymany user id " + this.data.user);
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -162,9 +173,5 @@ export class OrderFormComponent implements OnInit {
     const dialogRef = this.dialog.open(UserFormComponent, {
       data: this.user
     });
-  }
-  displayID(event) {
-    console.log("odebrano event " + event);
-    this.data.id = event;
   }
 }
