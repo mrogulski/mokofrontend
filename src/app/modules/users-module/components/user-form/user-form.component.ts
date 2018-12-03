@@ -44,7 +44,7 @@ export class UserFormComponent implements OnInit {
     console.log("nowy user " + JSON.stringify(user));
     this.usersService.save(user).subscribe(data => {
       this.userID.emit(JSON.stringify(data));
-      this.userIDService.changeMessage(JSON.stringify(data));
+      this.userIDService.changeMessage(Number(data));
     });
 
     this.onNoClick();
