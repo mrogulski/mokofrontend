@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>Order number {{ data.id }}</h1>
-<div mat-dialog-content>
+<h1>Order number {{ data.id }}</h1>
+<div>
   <form class="example-container" [formGroup]="orderForm">
     <!-- date from date to row -->
     <div class="row">
@@ -40,44 +40,30 @@
     <!-- user input -->
     <div class="row">
       <div class="col">
-        <mat-form-field>
-          <mat-select
-            [compareWith]="compareFn"
-            placeholder="user"
-            [(ngModel)]="data.user"
-            id="user"
-            name="user"
-            formControlName="user"
-          >
-            <ngx-mat-select-search
-              [formControl]="userFilterCtrl"
-              [noEntriesFoundLabel]="'no matching users found'"
-            ></ngx-mat-select-search>
-            <mat-option *ngFor="let user of users" [value]="user.id">
-              {{ user.firstName + " " + user.lastName }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-checkbox class="example-margin" (click)="newUser()"
-          >New User</mat-checkbox
+        <label>User</label>
+        <ng-select
+          [items]="users"
+          bindLabel="firstName"
+          autofocus
+          bindValue="id"
+          [(ngModel)]="data.user"
+          [ngModelOptions]="{ standalone: true }"
         >
+        </ng-select>
       </div>
 
       <!-- status picklist -->
       <div class="col">
-        <mat-form-field>
-          <mat-select
-            placeholder="status"
-            [(ngModel)]="data.status"
-            id="status"
-            name="status"
-            formControlName="status"
-          >
-            <mat-option *ngFor="let status of statuses" [value]="status">
-              {{ status }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <label>Status</label>
+        <ng-select
+          [items]="statuses"
+          bindLabel="status"
+          autofocus
+          bindValue="data.status"
+          [(ngModel)]="data.status"
+          [ngModelOptions]="{ standalone: true }"
+        >
+        </ng-select>
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -85,60 +71,52 @@
     <!-- bikes row -->
     <div class="row">
       <div class="col">
-        <mat-form-field>
-          <label for="adultBikes">How many adults bike do you want?</label>
-          <input
-            matInput
-            id="adultBikes"
-            name="adultBikes"
-            type="number"
-            formControlName="adultBikes"
-            [(ngModel)]="data.adultBike"
-          />
-        </mat-form-field>
+        <label for="adultBikes">How many adults bike do you want?</label>
+        <input
+          matInput
+          id="adultBikes"
+          name="adultBikes"
+          type="number"
+          formControlName="adultBikes"
+          [(ngModel)]="data.adultBike"
+        />
       </div>
       <div class="col">
-        <mat-form-field>
-          <label for="childBikes">How many childs bike do you want?</label>
-          <input
-            matInput
-            id="childBikes"
-            name="childBikes"
-            type="number"
-            formControlName="childBikes"
-            [(ngModel)]="data.childBike"
-          />
-        </mat-form-field>
+        <label for="childBikes">How many childs bike do you want?</label>
+        <input
+          matInput
+          id="childBikes"
+          name="childBikes"
+          type="number"
+          formControlName="childBikes"
+          [(ngModel)]="data.childBike"
+        />
       </div>
     </div>
 
     <!-- locks/helmets row -->
     <div class="row">
       <div class="col">
-        <mat-form-field>
-          <label for="helmet">How many helmets do you want?</label>
-          <input
-            matInput
-            id="helmet"
-            name="helmet"
-            type="number"
-            formControlName="helmet"
-            [(ngModel)]="data.helmet"
-          />
-        </mat-form-field>
+        <label for="helmet">How many helmets do you want?</label>
+        <input
+          matInput
+          id="helmet"
+          name="helmet"
+          type="number"
+          formControlName="helmet"
+          [(ngModel)]="data.helmet"
+        />
       </div>
       <div class="col">
-        <mat-form-field>
-          <label for="lock">How many locks do you want?</label>
-          <input
-            matInput
-            id="lock"
-            name="lock"
-            type="number"
-            formControlName="lock"
-            [(ngModel)]="data.lock"
-          />
-        </mat-form-field>
+        <label for="lock">How many locks do you want?</label>
+        <input
+          matInput
+          id="lock"
+          name="lock"
+          type="number"
+          formControlName="lock"
+          [(ngModel)]="data.lock"
+        />
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -163,52 +141,44 @@
     <div *ngIf="data.pickup">
       <div class="row">
         <div class="col">
-          <mat-form-field class="example-full-width">
-            <textarea
-              matInput
-              placeholder="Pickup from"
-              [(ngModel)]="data.pickupFrom"
-              formControlName="pickupFrom"
-            ></textarea>
-          </mat-form-field>
+          <textarea
+            matInput
+            placeholder="Pickup from"
+            [(ngModel)]="data.pickupFrom"
+            formControlName="pickupFrom"
+          ></textarea>
         </div>
         <div class="col">
-          <mat-form-field class="example-full-width">
-            <textarea
-              matInput
-              placeholder="Pickup to"
-              [(ngModel)]="data.pickupTo"
-              formControlName="pickupTo"
-            ></textarea>
-          </mat-form-field>
+          <textarea
+            matInput
+            placeholder="Pickup to"
+            [(ngModel)]="data.pickupTo"
+            formControlName="pickupTo"
+          ></textarea>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <mat-form-field>
-            <label for="pickupDistance">Pickup distance</label>
-            <input
-              matInput
-              id="pickupDistance"
-              name="pickupDistance"
-              type="number"
-              formControlName="pickupDistance"
-              [(ngModel)]="data.pickupDistance"
-            />
-          </mat-form-field>
+          <label for="pickupDistance">Pickup distance</label>
+          <input
+            matInput
+            id="pickupDistance"
+            name="pickupDistance"
+            type="number"
+            formControlName="pickupDistance"
+            [(ngModel)]="data.pickupDistance"
+          />
         </div>
         <div class="col">
-          <mat-form-field>
-            <label for="pickupValue">Pickup value</label>
-            <input
-              matInput
-              id="pickupValue"
-              name="pickupValue"
-              type="number"
-              formControlName="pickupValue"
-              [(ngModel)]="data.pickupValue"
-            />
-          </mat-form-field>
+          <label for="pickupValue">Pickup value</label>
+          <input
+            matInput
+            id="pickupValue"
+            name="pickupValue"
+            type="number"
+            formControlName="pickupValue"
+            [(ngModel)]="data.pickupValue"
+          />
         </div>
       </div>
     </div>
@@ -218,32 +188,28 @@
     <!-- costs -->
     <div class="row">
       <div class="col">
-        <mat-form-field>
-          <label for="initialValue">Initial value</label>
-          <input
-            matInput
-            id="initialValue"
-            name="initialValue"
-            #initialValue
-            type="number"
-            formControlName="initialValue"
-            [(ngModel)]="data.initialValue"
-          />
-          <!-- todo zrobic disable warunkowo na nowe i istniejace zamowienia -->
-        </mat-form-field>
+        <label for="initialValue">Initial value</label>
+        <input
+          matInput
+          id="initialValue"
+          name="initialValue"
+          #initialValue
+          type="number"
+          formControlName="initialValue"
+          [(ngModel)]="data.initialValue"
+        />
+        <!-- todo zrobic disable warunkowo na nowe i istniejace zamowienia -->
       </div>
       <div class="col">
-        <mat-form-field>
-          <label for="finalValue">Final value</label>
-          <input
-            matInput
-            id="finalValue"
-            name="finalValue"
-            type="number"
-            formControlName="finalValue"
-            [(ngModel)]="data.finalValue"
-          />
-        </mat-form-field>
+        <label for="finalValue">Final value</label>
+        <input
+          matInput
+          id="finalValue"
+          name="finalValue"
+          type="number"
+          formControlName="finalValue"
+          [(ngModel)]="data.finalValue"
+        />
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -264,7 +230,7 @@
     </div>
   </form>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="save(data)">Ok</button>
+<div>
+  <button (click)="onNoClick()">Cancel</button>
+  <button (click)="save(data)">Ok</button>
 </div>
