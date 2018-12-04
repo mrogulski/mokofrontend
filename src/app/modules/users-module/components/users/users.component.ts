@@ -14,7 +14,9 @@ export class UsersComponent implements OnInit {
     username: null,
     firstName: null,
     lastName: null,
-    email: null
+    email: null,
+    address: null,
+    phone: null
   };
 
   constructor(public dialog: MatDialog) {}

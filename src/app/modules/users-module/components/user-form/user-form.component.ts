@@ -31,7 +31,10 @@ export class UserFormComponent implements OnInit {
     this.userForm = formBuilder.group({
       id: data.id,
       lastName: data.lastName,
-      firstName: data.firstName
+      firstName: data.firstName,
+      address: data.address,
+      phone: data.phone,
+      email: data.email
     });
   }
 
@@ -41,11 +44,16 @@ export class UserFormComponent implements OnInit {
     this.dialogRef.close();
   }
   save(user: User) {
-    console.log("nowy user " + JSON.stringify(user));
-    this.usersService.save(user).subscribe(data => {
-      this.userID.emit(JSON.stringify(data));
-      this.userIDService.changeMessage(Number(data));
-    });
+    if (user.id) {
+      console.log("edit usera");
+      // this.usersService.
+    } else {
+      console.log("nowy user " + JSON.stringify(user));
+      this.usersService.save(user).subscribe(data => {
+        this.userID.emit(JSON.stringify(data));
+        this.userIDService.changeMessage(Number(data));
+      });
+    }
 
     this.onNoClick();
   }

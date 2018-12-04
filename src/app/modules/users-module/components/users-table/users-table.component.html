@@ -1,0 +1,71 @@
+<form class="form-inline">
+  <input
+    class="form-control mb-2 mr-sm-2 mb-sm-0"
+    type="text"
+    name="search"
+    placeholder="Search"
+    [(ngModel)]="filter"
+  />
+  <label for="exampleFormControlSelect1">Items per page</label>
+  <select
+    class="custom-select mb-2 mr-sm-2 mb-sm-0"
+    id="exampleFormControlSelect1"
+    [(ngModel)]="x"
+  >
+    <option>10</option>
+    <option>25</option>
+    <option>50</option>
+    <option>100</option>
+  </select>
+</form>
+<table
+  id="dtBasicExample"
+  class="table table-striped table-bordered table-sm"
+  cellspacing="0"
+  width="100%"
+>
+  <thead>
+    <tr>
+      <th class="th-sm" (click)="sort('id')">
+        ID<span
+          class="glyphicon sort-icon"
+          *ngIf="key == 'id'"
+          [ngClass]="{
+            'glyphicon-chevron-up': reverse,
+            'glyphicon-chevron-down': !reverse
+          }"
+        ></span>
+      </th>
+      <th class="th-sm" (click)="sort('firstName')">Firstname</th>
+      <th class="th-sm" (click)="sort('lastName')">Lastname</th>
+      <th class="th-sm" (click)="sort('username')">Username</th>
+      <th class="th-sm" (click)="sort('address')">Address</th>
+      <th class="th-sm" (click)="sort('email')">Email</th>
+      <th class="th-sm" (click)="sort('phone')">Phone</th>
+      <th class="th-sm"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let user of (users
+          | orderBy: key:reverse
+          | filter: filter
+          | paginate: { itemsPerPage: x, currentPage: p })
+      "
+    >
+      <td>{{ user.id }}</td>
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.address }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.phone }}</td>
+      <td (click)="editUser(user)"><i class="fas fa-facebook">Edit</i></td>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls
+  (pageChange)="p = $event"
+  class="float-right"
+></pagination-controls>

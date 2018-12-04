@@ -14,8 +14,6 @@ import { FormControl } from "@angular/forms";
 
 import { ReplaySubject } from "rxjs";
 import { Subject } from "rxjs";
-
-import { takeUntil } from "rxjs/operators";
 import { OrderService } from "../../services/order-service/order.service";
 import { UserFormComponent } from "../../../users-module/components/user-form/user-form.component";
 import { MatDialog } from "@angular/material";
@@ -32,7 +30,7 @@ export class OrderFormComponent implements OnInit {
   users: User[];
   selected = this.data.user;
   public userFilterCtrl: FormControl = new FormControl();
-  dateError: boolean = false;
+  // dateError: boolean = false;
 
   /** list of users filtered by search keyword */
   public filteredUsers: ReplaySubject<User[]> = new ReplaySubject<User[]>(1);
@@ -43,12 +41,13 @@ export class OrderFormComponent implements OnInit {
     username: null,
     firstName: null,
     lastName: null,
-    email: null
+    email: null,
+    address: null,
+    phone: null
   };
 
   constructor(
     private dialogRef: MatDialogRef<OrderFormComponent>,
-    private userDialog: MatDialogRef<UserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Order,
     formBuilder: FormBuilder,
     private usersService: UsersService,
@@ -62,7 +61,7 @@ export class OrderFormComponent implements OnInit {
     this.orderForm = formBuilder.group({
       createdDate: data.createdDate,
       dateFrom: data.dateFrom,
-      dateTo: data.dateTo,
+      dateTo: [data.dateTo, Validators.required],
       user: data.user,
       status: data.status,
       adultBikes: [Validators.min(1)],
@@ -82,11 +81,11 @@ export class OrderFormComponent implements OnInit {
   ngOnInit() {
     this.getAllUsers();
     // listen for search field value changes
-    this.userFilterCtrl.valueChanges
-      .pipe(takeUntil(this._onDestroy))
-      .subscribe(() => {
-        this.filterUsers();
-      });
+    // this.userFilterCtrl.valueChanges
+    //   .pipe(takeUntil(this._onDestroy))
+    //   .subscribe(() => {
+    //     this.filterUsers();
+    //   });
     this.userIDService.currentID.subscribe(ID => {
       this.getAllUsers();
       this.data.user = ID;
@@ -106,24 +105,24 @@ export class OrderFormComponent implements OnInit {
     order.dateFrom = String(moment(order.dateFrom).format(SAVE_DATE_FORMAT));
     order.dateTo = String(moment(order.dateTo).format(SAVE_DATE_FORMAT));
     console.log(" order to save " + JSON.stringify(order));
-    if (order.dateFrom === "Invalid date" || order.dateTo === "Invalid date") {
-      console.log("invalid date w chuj");
-      this.dateError = true;
-    } else {
-      if (order.id) {
-        console.log("wysyłamy di edycji " + order.id);
-        this.orderService.edit(order).subscribe(data => {
-          console.log(" order updated " + data);
-          this.dialogRef.close();
-        });
+    // if (order.dateFrom === "Invalid date" || order.dateTo === "Invalid date") {
+    //   console.log("invalid date w chuj");
+    //   this.dateError = true;
+    // } else {
+    if (order.id) {
+      console.log("wysyłamy di edycji " + order.id);
+      this.orderService.edit(order).subscribe(data => {
+        console.log(" order updated " + data);
         this.dialogRef.close();
-      } else {
-        this.orderService.save(order).subscribe(data => {
-          console.log(" order saved " + data);
-          this.dialogRef.close();
-        });
-      }
+      });
+      this.dialogRef.close();
+    } else {
+      this.orderService.save(order).subscribe(data => {
+        console.log(" order saved " + data);
+        this.dialogRef.close();
+      });
     }
+    // }
   }
 
   onNoClick(): void {
@@ -133,31 +132,31 @@ export class OrderFormComponent implements OnInit {
   getAllUsers() {
     this.usersService.getAllUsers().subscribe(users => (this.users = users));
   }
-  filterUsersServerSide(search: string) {
-    this.usersService
-      .getFilteredUsers(search)
-      .subscribe(users => (this.users = users));
-  }
+  // filterUsersServerSide(search: string) {
+  //   this.usersService
+  //     .getFilteredUsers(search)
+  //     .subscribe(users => (this.users = users));
+  // }
 
-  private filterUsers() {
-    if (!this.users) {
-      return;
-    }
-    // get the search keyword
-    let search = this.userFilterCtrl.value;
-    if (!search) {
-      this.getAllUsers();
-      console.log("wszytskei usery");
-      return;
-    } else {
-      search = search.toLowerCase();
-      // filter the users
-      //server side
-      this.filterUsersServerSide(search);
-      console.log("szuka userow w bazie");
-      return;
-    }
-  }
+  // private filterUsers() {
+  //   if (!this.users) {
+  //     return;
+  //   }
+  //   // get the search keyword
+  //   let search = this.userFilterCtrl.value;
+  //   if (!search) {
+  //     this.getAllUsers();
+  //     console.log("wszytskei usery");
+  //     return;
+  //   } else {
+  //     search = search.toLowerCase();
+  //     // filter the users
+  //     //server side
+  //     this.filterUsersServerSide(search);
+  //     console.log("szuka userow w bazie");
+  //     return;
+  //   }
+  // }narazie niepotrzebne
 
   //to fix pre-select issue https://github.com/angular/material2/issues/8212
   //https://angular.io/api/forms/SelectControlValueAccessor
