@@ -87,15 +87,11 @@ export class OrderFormComponent implements OnInit {
       .subscribe(() => {
         this.filterUsers();
       });
-    // this.userIDService.currentID.subscribe(ID => {
-    //   //do poprawy
-    //   // if (ID === "NaN") {
-    //   //   console.log("otrzymany user id " + ID);
-    //   // } else {
-    //   this.data.user = ID;
-    //   console.log("otrzymany user id " + this.data.user);
-    //   // }
-    // });
+    this.userIDService.currentID.subscribe(ID => {
+      this.getAllUsers();
+      this.data.user = ID;
+      console.log("otrzymany user id " + this.data.user);
+    });
   }
 
   ngOnDestroy() {
