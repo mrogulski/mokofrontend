@@ -32,6 +32,7 @@ export class UserFormComponent implements OnInit {
       id: data.id,
       lastName: data.lastName,
       firstName: data.firstName,
+      username: data.username,
       address: data.address,
       phone: data.phone,
       email: data.email
@@ -46,7 +47,9 @@ export class UserFormComponent implements OnInit {
   save(user: User) {
     if (user.id) {
       console.log("edit usera");
-      // this.usersService.
+      this.usersService.edit(user).subscribe(data => {
+        console.log("zedytowano usera " + data);
+      });
     } else {
       console.log("nowy user " + JSON.stringify(user));
       this.usersService.save(user).subscribe(data => {

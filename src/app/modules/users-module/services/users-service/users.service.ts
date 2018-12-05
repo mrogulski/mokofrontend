@@ -55,4 +55,11 @@ export class UsersService {
   save(user: User) {
     return this.http.post(this.API_URL + "/users/new", user, this.httpOptions);
   }
+  edit(user: User) {
+    return this.http.patch(
+      this.API_URL + "/users/" + user.id,
+      user,
+      this.httpOptions
+    );
+  }
 }
