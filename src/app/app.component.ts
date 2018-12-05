@@ -10,8 +10,8 @@ export class AppComponent {
   title = "mokofrontend";
   canActivate: boolean;
 
-  constructor(authguard: AuthGuardService){
+  constructor(authguard: AuthGuardService) {
     this.canActivate = authguard.canActivate();
-
+    console.log("can activate " + authguard.canActivate());
   }
 }
