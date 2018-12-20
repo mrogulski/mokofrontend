@@ -130,7 +130,13 @@ export class OrderFormComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.usersService.getAllUsers().subscribe(users => (this.users = users));
+    this.usersService.getAllUsers().subscribe(users => {
+      this.users = users;
+      this.users.map(i => {
+        i.firstName = i.firstName + " " + i.lastName + " " + i.phone;
+        return i;
+      });
+    });
   }
   // filterUsersServerSide(search: string) {
   //   this.usersService
